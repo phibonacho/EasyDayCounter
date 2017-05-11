@@ -4,9 +4,11 @@ using namespace std;
 
 enum DATE_ERROR {DAY_ERROR, MONTH_ERROR, YEAR_ERROR};
 const int MIN_YEAR = 1970;
+
 struct data{
 	int day, month, year, days_from_MIN_YEARS;
 };
+
 bool is_leap_year(const int&);
 int compute_days(const data&);
 data get_date(const int&, const int&, const int&);
@@ -111,6 +113,6 @@ data get_date(const int& d, const int& m, const int& y){
 	new_data.day = d;
 	new_data.month = m;
 	new_data.year = y;
-	new_data.days_MIN_YEARS = compute_days(new_data);
+	new_data.days_from_MIN_YEARS = compute_days(new_data);
 	return new_data;
 }
