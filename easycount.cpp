@@ -5,7 +5,7 @@ using namespace std;
 enum DATE_ERROR {DAY_ERROR, MONTH_ERROR, YEAR_ERROR};
 const int MIN_YEAR = 1970;
 struct data{
-	int day, month, year, days_from_1970;
+	int day, month, year, days_from_MIN_YEARS;
 };
 bool is_leap_year(const int&);
 int compute_days(const data&);
@@ -43,17 +43,16 @@ catch(DATE_ERROR n){
 	cerr<<endl;
 	return 1;
 }
-	cerr<<"days between dates: "<<abs(prima_data.days_from_1970-seconda_data.days_from_1970)<<endl;
+	cerr<<"days between dates: "<<abs(prima_data.days_from_MIN_YEARS-seconda_data.days_from_MIN_YEARS)<<endl;
 	return 0;
 }
 
 bool is_leap_year(const int& year){
-	if(year< MIN_YEAR) return false; 
 	return ((year%400==0 ||year%100 != 0)&&year%4 ==0);
 }
 
 int compute_days(const data& d){
-	int result = 0;
+	int result = -1;
 	result+=d.day;
 	for(int i=MIN_YEAR; i<d.year; i++) result+= (is_leap_year(i)? 366 : 365);
 	switch(d.month-1){
@@ -80,7 +79,6 @@ int compute_days(const data& d){
 		case 1:
 			result+=31;
 	}
-	result-=1;
 	return result;
 }
 
@@ -113,6 +111,6 @@ data get_date(const int& d, const int& m, const int& y){
 	new_data.day = d;
 	new_data.month = m;
 	new_data.year = y;
-	new_data.days_from_1970 = compute_days(new_data);
+	new_data.days_MIN_YEARS = compute_days(new_data);
 	return new_data;
 }
