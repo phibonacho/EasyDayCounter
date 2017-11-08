@@ -54,9 +54,13 @@ bool is_leap_year(const int& year){
 }
 
 int compute_days(const data& d){
+	// init result:
 	int result = -1;
+	// add day number to result:
 	result+=d.day;
+	// add 365 or 366 day to final result depending on leap year:
 	for(int i=MIN_YEAR; i<d.year; i++) result+= (is_leap_year(i)? 366 : 365);
+	// add entire months:
 	switch(d.month-1){
 		case 11:
 			result+=30;
